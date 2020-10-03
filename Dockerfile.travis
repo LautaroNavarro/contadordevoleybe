@@ -1,0 +1,21 @@
+FROM python:3.7
+
+WORKDIR /app
+
+COPY requirements.txt ./
+
+RUN python3 -m pip install --upgrade pip
+
+COPY requirements-dev.txt ./
+
+RUN pip3 install -r requirements.txt
+
+RUN pip3 install -r requirements-dev.txt
+
+COPY . .
+
+ENV DEBUG=True
+
+ENV DJANGO_SETTINGS_MODULE=api.testing_settings
+
+CMD ["python3",  "manage.py", "runserver", "0.0.0.0:8000"]
