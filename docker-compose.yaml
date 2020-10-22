@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    environment:
+      - PGHOST=localhost
+      - PGPORT=5432
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
