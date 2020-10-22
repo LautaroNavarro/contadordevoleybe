@@ -1,0 +1,20 @@
+version: 2.1
+
+jobs:
+  build-and-test:
+    docker:
+      - image: docker
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          command: docker build -f Dockerfile.travis -t build .
+          name: Build
+      - run:
+          command: docker run build pytest
+          name: Test
+
+workflows:
+  main:
+    jobs:
+      - build-and-test
