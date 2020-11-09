@@ -16,8 +16,8 @@ jobs:
       - run:
           command: docker cp pytest:/app/cov.xml ./
           name: Copy artifact
-    - store_artifacts:
-        path: ./cov.xml
+      - store_artifacts:
+          path: ./cov.xml
 
 workflows:
   main:
