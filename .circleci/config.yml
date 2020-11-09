@@ -11,13 +11,13 @@ jobs:
           command: docker build -f Dockerfile.travis -t build .
           name: Build
       - run:
-          command: docker run --name pytest build pytest --junitxml=./cov.xml
+          command: docker run --name pytest build pytest --cov-report=html --cov=
           name: Test
       - run:
-          command: docker cp pytest:/app/cov.xml ./
+          command: docker cp pytest:/app/htmlcov ./
           name: Copy artifact
       - store_artifacts:
-          path: ./cov.xml
+          path: ./htmlcov
 
 workflows:
   main:
